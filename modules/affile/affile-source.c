@@ -204,9 +204,9 @@ affile_sd_construct_transport(AFFileSourceDriver *self, gint fd)
     return log_transport_device_new(fd, 10);
   else if (affile_is_linux_dev_kmsg(self->filename->str))
     {
-      if (lseek(fd, 0, SEEK_END) < 0)
+      if (lseek(fd, 0, SEEK_DATA) < 0)
         {
-          msg_error("Error seeking /dev/kmsg to the end",
+          msg_error("Error seeking /dev/kmsg to the start",
                     evt_tag_str("error", g_strerror(errno)),
                     NULL);
         }
